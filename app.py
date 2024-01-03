@@ -1,13 +1,19 @@
-from flask import Flask
-
+from flask import Flask,request,render_template,send_file
+import grouplib
 app = Flask(__name__)
 
-@app.route("/")
+@app.get("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
-@app.route("/group")
+    return render_template('index.html')
+@app.post("/group")
 def response():
-    pass
+    subjectCode=request.form.get('subjectCode')
+    classCode=request.form.get('classCode')
+    groupSize=int(request.form.get('groupSize'))
+    print(subjectCode,classCode,groupSize)
+    final_result=grouplib.webSearch(classCode,subjectCode,groupSize)
+    grouplib.logExcel(final_result)
+    return send_file('./result.xlsx')
 
 
 if __name__=='__main__':

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Web</title>
+		<style>
+			html{
+				user-select:none;
+			}
+			container{
+				width:100%%
+				text-align:center;
+				display:flex;
+			}
+			.form{
+				margin:auto;
+				border:solid;
+				width:fit-content;
+				padding:15px;
+				border-radius:15px;
+			}
+			.submit-btn, summary:hover{
+				cursor:pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="showno">
+			<h3>09050940 王尚鵬的Python期末專題</h3>
+			<details>
+				<summary>簡介</summary>
+				<p>這是一個使用Python透過ps4爬取銘傳大學學生資訊並依照人數要求自動分組的Flask Web App</p>
+			<p>This is a web application that uses Flask for its backend. It is capable of crawling information about students and automatically dividing them into several groups.</p>
+			  </details>
+			
+		</div>
+		<div class="container">
+			<form action="/group" method="post" class="form">
+				<label for="subjectCode">科目代碼:</label>
+				<input type="text" id="subjectCode" name="subjectCode"><br><br>
+		
+				<label for="classCode">班級代碼:</label>
+				<input type="text" id="classCode" name="classCode"><br><br>
+		
+				<label for="groupSize">分組人數:</label>
+				<select id="groupSize" name="groupSize">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select><br><br>
+		
+				<input class="submit-btn" type="submit" value="提交">
+			</form>
+		</div>
+	</body>
+</html>
