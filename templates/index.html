@@ -4,23 +4,108 @@
 		<meta charset="UTF-8">
 		<title>Web</title>
 		<style>
+			@keyframes float {
+				0% {
+					margin:auto;
+					box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+					transform: translatey(0px);
+				}
+				50% {
+					margin:auto;
+					box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+					transform: translatey(-10px);
+				}
+				100% {
+					margin:auto;
+					box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+					transform: translatey(0px);
+				}
+			}
+			@keyframes err {
+				0% {
+
+					opacity: 1;
+				}
+				25% {
+
+					opacity: 0.75;
+				}
+				50% {
+
+					opacity: 0.5;
+
+				}
+				75% {
+
+					opacity: 0.25;
+				}
+				100% {
+					opacity: 0.0;
+				}
+			}
 			html{
-				user-select:none;
+				height: 100%;
+				margin: 0;
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background: linear-gradient(#e66465, #9198e5);
+				color:white;
 			}
 			container{
 				width:100%%
 				text-align:center;
 				display:flex;
 			}
+
 			.form{
+				position:
 				margin:auto;
 				border:solid;
-				width:fit-content;
+				border-color:white;
+				width:70%	%;
 				padding:15px;
 				border-radius:15px;
+				animation:float 3s ease-in-out infinite;
 			}
 			.submit-btn, summary:hover{
 				cursor:pointer;
+			}
+			p,label,h1,h2,h3,sumarry{
+				user-select:none;
+			}
+			#selectable{
+				user-select:auto;
+			}
+			.inp:valid{
+				border:1px solid green;
+			}
+			.inp:invalid{
+				border:1px solid red;
+			}
+			.error{
+				width:fit-content;
+				hidden;
+				padding:1px;
+				color:black;
+				background-color:orange;
+				opacity: 0;
+				animation:err 2s ease-out 1;
+				
+			}
+			h2{
+				font-size: 3rem;
+			}
+			h3{
+				font-size: 2.5rem;
+			}
+			label,input,select{
+				font-size: 1.55rem;
+			}
+			p{
+				font-size: 1rem;
+			}
+			details{
+				margin-bottom:3rem;
 			}
 		</style>
 	</head>
@@ -29,18 +114,21 @@
 			<h3>09050940 王尚鵬的Python期末專題</h3>
 			<details>
 				<summary>簡介</summary>
-				<p>這是一個使用Python透過ps4爬取銘傳大學學生資訊並依照人數要求自動分組的Flask Web App</p>
-			<p>This is a web application that uses Flask for its backend. It is capable of crawling information about students and automatically dividing them into several groups.</p>
+				<p>這是一個使用Python透過bs4爬取銘傳大學學生資訊並依照人數要求自動分組的Flask Web App</p>
+				<p>This is a web application that uses Flask for its backend. It is capable of crawling information about students and automatically dividing them into several groups.</p>
+				<p>你可以使用以下資訊來進行測試</p>
+				<p id='selectable'>科目代號: 05244, 班級代號:05352</p>
 			  </details>
 			
 		</div>
+		
 		<div class="container">
 			<form action="/group" method="post" class="form">
 				<label for="subjectCode">科目代碼:</label>
-				<input type="text" id="subjectCode" name="subjectCode"><br><br>
+				<input class="inp" type="tel" id="subjectCode" name="subjectCode" pattern="[0-9]{5}" required><br><br>
 		
 				<label for="classCode">班級代碼:</label>
-				<input type="text" id="classCode" name="classCode"><br><br>
+				<input class="inp" type="tel" id="classCode" name="classCode" pattern="[0-9]{5}" required><br><br>
 		
 				<label for="groupSize">分組人數:</label>
 				<select id="groupSize" name="groupSize">
@@ -59,5 +147,6 @@
 				<input class="submit-btn" type="submit" value="提交">
 			</form>
 		</div>
+		<h2 class='error'>{{ stat }}</h2>
 	</body>
 </html>
